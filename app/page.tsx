@@ -16,6 +16,7 @@ import jaja from "@/public/jaja.jpg";
 import Kartu from "@/components/card";
 import sa from "@/public/sa.jpg";
 import du from "@/public/du.jpg";
+import Group1 from "@/public/Group1.png";
 import Placement from "@/components/placement"; // Sesuaikan dengan path file Placement
 
 export default function Home() {
@@ -30,51 +31,24 @@ export default function Home() {
 
   return (
     <>
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 px-4 lg:px-12 py-8">
+      <div className="flex flex-col justify-center">
+        <Image
+          src={Group1}
+          width={1080}
+          height={1920}
+          alt="dua"
+          className="rounded-lg"
+        />
+      </div>
+      <div></div>
+      <div>
         <div className="flex flex-col justify-center">
-          <h1 className={title({ color: "pink" })}>Halo</h1>
-          <p className={subtitle({ fullWidth: true })}>
+          <p className={`${subtitle({ fullWidth: true })} text-justify`}>
             Selamat datang di toko Rano Cake, menjual aneka kue tradisional, kue
             ulang tahun, kue kering lebaran hingga asinan Betawi Selamat datang
             di toko Rano Cake, menjual aneka kue tradisional, kue ulang tahun,
-            kue ke ring lebaran hingga asinan Betawi
+            kue kering lebaran hingga asinan Betawi
           </p>
-          <Tombol
-            size="lg"
-            label="Pesan Sekarang"
-            onClick={handleClick}
-            variant="ghost"
-            isLoading={loading}
-            style={{ backgroundColor: "#0072f5" }} // Menggunakan warna primer yang Anda tentukan
-          />
-        </div>
-        <div className="flex justify-center">
-          <Image
-            src={satu}
-            width={350}
-            height={299}
-            alt="satu"
-            className="rounded-lg pb-8"
-          />
-        </div>
-        <div className="flex flex-cols-1 lg:flex-cols-2 gap-8 px-4 lg:px-12 py-8">
-          <Image
-            src={dua}
-            width={350}
-            height={299}
-            alt="dua"
-            className="rounded-lg"
-          />
-        </div>
-        <div className="flex flex-cols-1 lg:flex-cols-2 gap-8 px-4 lg:px-12 py-8">
-          <div className="flex flex-col justify-center">
-            <p className={`${subtitle({ fullWidth: true })} text-justify`}>
-              Selamat datang di toko Rano Cake, menjual aneka kue tradisional,
-              kue ulang tahun, kue kering lebaran hingga asinan Betawi Selamat
-              datang di toko Rano Cake, menjual aneka kue tradisional, kue ulang
-              tahun, kue kering lebaran hingga asinan Betawi
-            </p>
-          </div>
         </div>
       </div>
       <div className="col-span-12 flex justify-center pt-10">

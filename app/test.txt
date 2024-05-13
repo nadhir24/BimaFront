@@ -1,0 +1,17 @@
+    <Tombol
+            size="lg"
+            label="Pesan Sekarang"
+            onClick={handleClick}
+            variant="ghost"
+            isLoading={loading}
+            style={{ backgroundColor: "#0072f5" }} // Menggunakan warna primer yang Anda tentukan
+          />
+
+           <div className="flex flex-col justify-center">
+            <p className={`${subtitle({ fullWidth: true })} text-justify`}>
+              Selamat datang di toko Rano Cake, menjual aneka kue tradisional,
+              kue ulang tahun, kue kering lebaran hingga asinan Betawi Selamat
+              datang di toko Rano Cake, menjual aneka kue tradisional, kue ulang
+              tahun, kue kering lebaran hingga asinan Betawi
+            </p>
+          </div>
