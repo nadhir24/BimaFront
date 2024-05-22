@@ -23,6 +23,6 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "components/button.tsx", "components/Clist.jsx", "components/navbar.jsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "components/button.tsx", "components/Clist.jsx", "components/navbar.tsx"],
   "exclude": ["node_modules"]
 }

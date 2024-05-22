@@ -22,42 +22,42 @@ const products: Product[] = [
     name: "Produk 1",
     category: "kue ulangtahun",
     price: 4,
-    image: { src: duImage.src, radius: "sm" },
+    image: { src: duImage.src, radius: "none" },
   },
   {
     id: 2,
     name: "Produk 2",
     category: "kue tradisional",
     price: 50,
-    image: { src: jaImage.src, radius: "sm" },
+    image: { src: jaImage.src, radius: "none" },
   },
   {
     id: 3,
     name: "Produk 3",
     category: "kue ulangtahun",
     price: 5,
-    image: { src: duImage.src, radius: "sm" },
+    image: { src: duImage.src, radius: "none" },
   },
   {
     id: 4,
     name: "Produk 4",
     category: "kue tradisional",
     price: 50,
-    image: { src: jaImage.src, radius: "sm" },
+    image: { src: jaImage.src, radius: "none" },
   },
   {
     id: 5,
     name: "Produk 5",
     category: "kue ulangtahun",
     price: 5,
-    image: { src: duImage.src, radius: "sm" },
+    image: { src: duImage.src, radius: "none" },
   },
   {
     id: 6,
     name: "Produk 6",
     category: "kue tradisional",
     price: 50,
-    image: { src: jaImage.src, radius: "sm" },
+    image: { src: jaImage.src, radius: "none" },
   },
   // Add more products if needed
 ];
@@ -94,8 +94,8 @@ const Placement: React.FC = () => {
   });
 
   return (
-    <div className="grid grid-cols-6 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-4 pt-12 pl-10">
-      <div className="col-span-2">
+    <div className="grid grid-cols-4 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-6  pt-12 ">
+      <div className="col-span-1">
         <NextUICard>
           <div>
             <label htmlFor="category">Category:</label>
@@ -127,24 +127,27 @@ const Placement: React.FC = () => {
           </div>
         </NextUICard>
       </div>
-      <div className="col-span-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+      <div className="grid col-span-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {filteredProducts.map((product) => (
           <NextUICard
             key={product.id}
-            className="w-auto"
-            style={{ width: "145px", height: "270px", borderRadius: "20px" }}
+            className="w-auto m-4 flex flex-col" // Added flex-col to make card content stack vertically
+            style={{ width: "204px", height: "373px", borderRadius: "20px" }}
           >
-            <Image
-              src={product.image.src}
-              alt={product.name}
-              width={300}
-              height={100}
-              radius={product.image.radius}
-            />
+            <div className="h-1/2">
+              <Image
+                src={product.image.src}
+                alt={product.name}
+                width={142} // Sesuaikan lebar gambar sesuai dengan aspek rasio
+                // Set height to full and removed h-1/2
+              />
+            </div>
             <Divider />
-            <p>{product.name}</p>
-            <p>{product.price}</p>
-            <p>terjual barang</p>
+            <div className="flex-grow flex flex-col justify-between p-4">
+              <p>{product.name}</p>
+              <p>{product.price}</p>
+              <p>terjual barang</p>
+            </div>
           </NextUICard>
         ))}
       </div>

@@ -4,7 +4,7 @@ import { title, subtitle } from "@/components/primitives";
 import Image from "next/image";
 import satu from "@/public/satu.jpg";
 import dua from "@/public/dua.jpg";
-import Tombol from "@/components/button";
+import NextUIButton from "@/components/button";
 import Avatars from "@/components/avatars";
 import { useState } from "react";
 import CardComponent from "@/components/cake";
@@ -16,7 +16,7 @@ import jaja from "@/public/jaja.jpg";
 import Kartu from "@/components/card";
 import sa from "@/public/sa.jpg";
 import du from "@/public/du.jpg";
-import Group1 from "@/public/Group1.png";
+import Group10 from "@/public/Group 10.png";
 import Placement from "@/components/placement"; // Sesuaikan dengan path file Placement
 
 export default function Home() {
@@ -31,30 +31,38 @@ export default function Home() {
 
   return (
     <>
-      <div className="flex flex-col justify-center">
+      <div className="relative max-w-full ">
         <Image
-          src={Group1}
-          width={1080}
-          height={1920}
+          src={Group10}
           alt="dua"
-          className="rounded-lg"
+          className=" inset-0 flex flex-col justify-center items-center rounded-lg"
         />
-      </div>
-      <div></div>
-      <div>
-        <div className="flex flex-col justify-center">
-          <p className={`${subtitle({ fullWidth: true })} text-justify`}>
-            Selamat datang di toko Rano Cake, menjual aneka kue tradisional, kue
-            ulang tahun, kue kering lebaran hingga asinan Betawi Selamat datang
-            di toko Rano Cake, menjual aneka kue tradisional, kue ulang tahun,
-            kue kering lebaran hingga asinan Betawi
-          </p>
+        <div className=" absolute inset-0 flex flex-col justify-center items-center bg-black bg-opacity-30 opacity-0 transition-opacity duration-200 hover:opacity-100 rounded-lg mx-auto">
+          <div className=" bg-black mb-2 rounded-lg">
+            <h1 className={title({ color: "violet" })}>
+              Temukan Kue Impian Anda
+            </h1>
+          </div>
+          <NextUIButton
+            size="md"
+            variant="faded"
+            label="Pesan Sekarang"
+            onClick={handleClick}
+            isLoading={loading}
+          />
         </div>
       </div>
+      <div>
+        <p className={`${subtitle({ fullWidth: true })} text-center`}>
+          Selamat datang di toko Rano Cake, menjual aneka kue tradisional, kue
+          ulang tahun, kue kering lebaran hingga asinan Betawi dan juga telah di
+          percaya oleh puluhan customer yang selalu repeat order setiap ada
+          acara kecil maupun besar dan juga disukai oleh berbagai kalangan mulai
+          dari yang kecil hingga orang dewasa*
+        </p>
+      </div>
       <div className="col-span-12 flex justify-center pt-10">
-        {" "}
-        {/* Tambahkan col-span-12 di sini */}
-        <h1 className={title()}>Galeri Kecil Kami</h1>
+        <h1 className={`${title()} pb-10`}>Galeri Kecil Kami</h1>
       </div>{" "}
       <div className="max-w-[900px] gap-2 grid grid-cols-12 grid-rows-2 px-8 mx-auto">
         {/* Tambahkan text-center di sini */}
@@ -90,12 +98,9 @@ export default function Home() {
         />
       </div>
       <div className="col-span-12 flex justify-center pt-10">
-        {" "}
-        ``
-        {/* Tambahkan col-span-12 di sini */}
         <h1 className={title()}>Apa Kata Mereka?</h1>
       </div>
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 pt-10">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 pt-10">
         <Kartu
           logoSrc="https://avatars.githubusercontent.com/u/86160567?s=200&v=4"
           title="Bima Aryantoro"

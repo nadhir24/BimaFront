@@ -1,12 +1,10 @@
 import Avatars from "@/components/avatars";
-import VerticalNavbar from '@/components/verticalnav'
+import Lynk from "@/components/link";
 export default function UserProfile({ userData, bonus, members }) {
   return (
     <>
-      <div>
-        <Avatars size="lg" />
-        <VerticalNavbar/>
-      </div>
+      <h1>halo</h1>
+      {/* <Lynk /> */}
     </>
   );
 }

@@ -9,8 +9,8 @@ export const siteConfig = {
       href: "/",
     },
     {
-      label: "Docs",
-      href: "/docs",
+      label: "Belanja",
+      href: "/Belanja",
     },
     {
       label: "Pricing",
@@ -21,8 +21,8 @@ export const siteConfig = {
       href: "/blog",
     },
     {
-      label: "About",
-      href: "/about",
+      label: "tentang kami",
+      href: "/Tentang-Kami",
     },
   ],
   navMenuItems: [
@@ -44,11 +44,26 @@ export const siteConfig = {
       href: "/Tentang-Kami",
     },
   ],
+  footerItems: [
+    {
+      label: "tentang kami",
+      href: "/Tentang-Kami",
+    },
+    {
+      label: "Toko Kami",
+      href: "/TokoKami",
+    },
+    {
+      label: "Katalog",
+      href: "/Katalog",
+    },
+    {
+      label: "Belanja",
+      href: "/Belanja",
+    },
+  ],
   links: {
     google: "https://github.com/nextui-org/nextui",
-    twitter: "https://twitter.com/getnextui",
-    docs: "https://nextui.org",
-    discord: "https://discord.gg/9b6yyZKmH4",
-    sponsor: "https://patreon.com/jrgarciadev",
+    whatsapp: "https://wa.me/081385642024",
   },
 };
