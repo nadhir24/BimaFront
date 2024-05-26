@@ -5,12 +5,12 @@ export const siteConfig = {
   description: "Make beautiful Cake Everyday.",
   navItems: [
     {
-      label: "Home",
+      label: "Beranda",
       href: "/",
     },
     {
-      label: "Belanja",
-      href: "/Belanja",
+      label: "Katalog",
+      href: "/katalog",
     },
     {
       label: "Pricing",
@@ -21,8 +21,8 @@ export const siteConfig = {
       href: "/blog",
     },
     {
-      label: "tentang kami",
-      href: "/Tentang-Kami",
+      label: "Tentang kami",
+      href: "/tentangkami",
     },
   ],
   navMenuItems: [

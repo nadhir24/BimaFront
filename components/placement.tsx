@@ -4,6 +4,7 @@ import { Card as NextUICard, Divider, Image, Slider } from "@nextui-org/react";
 import { useState } from "react";
 import duImage from "@/public/du.jpg";
 import jaImage from "@/public/ja.jpg";
+import { title } from "./primitives";
 
 interface Product {
   id: number;
@@ -94,7 +95,7 @@ const Placement: React.FC = () => {
   });
 
   return (
-    <div className="grid grid-cols-4 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-6  pt-12 ">
+    <div className="grid grid-cols-5 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-6  pt-12 ">
       <div className="col-span-1">
         <NextUICard>
           <div>
@@ -127,25 +128,26 @@ const Placement: React.FC = () => {
           </div>
         </NextUICard>
       </div>
-      <div className="grid col-span-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+      <div className="grid col-span-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mb-24">
         {filteredProducts.map((product) => (
           <NextUICard
             key={product.id}
             className="w-auto m-4 flex flex-col" // Added flex-col to make card content stack vertically
-            style={{ width: "204px", height: "373px", borderRadius: "20px" }}
+            style={{ width: "177px", height: "300px", borderRadius: "20px" }}
           >
             <div className="h-1/2">
               <Image
                 src={product.image.src}
                 alt={product.name}
-                width={142} // Sesuaikan lebar gambar sesuai dengan aspek rasio
-                // Set height to full and removed h-1/2
+                className="w-full h-full object-cover"
+                style={{ width: "177px", height: "160px" }}
               />
             </div>
             <Divider />
-            <div className="flex-grow flex flex-col justify-between p-4">
-              <p>{product.name}</p>
-              <p>{product.price}</p>
+            <div className=" flex flex-col justify-between p-4  ">
+              <h1 className={title({ size: "sm" })}>{product.name}</h1>
+              <h2 className="text-orange-500">{product.price}</h2>
+              <p>RanoCake Jakarta</p>
               <p>terjual barang</p>
             </div>
           </NextUICard>
