@@ -1,13 +1,37 @@
 import React from "react";
-
+import {
+  Card,
+  CardHeader,
+  CardBody,
+  CardFooter,
+  Divider,
+  Image,
+} from "@nextui-org/card";
 export default function CheckoutPage() {
   return (
     <>
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 px-4 lg:px-12 py-8">
-        <div className="flex justify-center">
-          <h1 className="text-3xl font-bold text-center">Cool</h1>
+      <div className="grid grid-cols-4 lg:grid-cols-2 gap-8 px-4 lg:px-12 py-8">
+        <div>
+          <h1 className="text-3xl font-bold text-center">Checkout makanan</h1>
+          <Card className="max-w-[400px]">
+            <CardBody>
+              <p>
+                Make beautiful websites regardless of your design experience.
+              </p>
+            </CardBody>
+            <CardFooter>
+              <Link
+                isExternal
+                showAnchorIcon
+                href="https://github.com/nextui-org/nextui"
+              >
+                Visit source code on GitHub.
+              </Link>
+            </CardFooter>
+          </Card>
         </div>
         <div className="flex justify-center">
+          3
           <table className="w-full">
             <thead>
               <tr className="bg-gray-100">
@@ -54,6 +78,13 @@ export default function CheckoutPage() {
             </tfoot>
           </table>
         </div>
+        <div>2</div>
+
+        <div>4</div>
+        <div>5</div>
+        <div>6</div>
+        <div>7</div>
+        <div>8</div>
       </div>
     </>
   );

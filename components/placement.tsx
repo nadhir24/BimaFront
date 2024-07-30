@@ -2,8 +2,9 @@
 
 import { useState, useEffect } from "react";
 import { Card as NextUICard, Divider, Image, Slider } from "@nextui-org/react";
-import axios from "axios";
-import { image } from "@nextui-org/theme";
+import { useState } from "react";
+import duImage from "@/public/du.jpg";
+import jaImage from "@/public/ja.jpg";
 
 interface Product {
   id: number;
@@ -69,7 +70,7 @@ const Placement: React.FC = () => {
   });
   console.log(products[0].image);
   return (
-    <div className="grid grid-cols-4 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-6 pt-12">
+    <div className="grid grid-cols-4 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-6  pt-12 ">
       <div className="col-span-1">
         <NextUICard>
           <div>
@@ -101,28 +102,26 @@ const Placement: React.FC = () => {
           </div>
         </NextUICard>
       </div>
-      <div className="grid col-span-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+      <div className="grid col-span-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mb-24">
         {filteredProducts.map((product) => (
           <NextUICard
             key={product.id}
-            className="w-auto m-4 flex flex-col"
+            className="w-auto m-4 flex flex-col" // Added flex-col to make card content stack vertically
             style={{ width: "204px", height: "373px", borderRadius: "20px" }}
           >
             <div className="h-full">
               <Image
-                src={`http://localhost:5000/${product.image}`} // Menggunakan properti image langsung dari data produk
-                alt="hahay"
-                className="object-cover"
-                style={{ borderRadius: "20px 20px 0 0" }}
+                src={product.image.src}
+                alt={product.name}
+                width={142} // Sesuaikan lebar gambar sesuai dengan aspek rasio
+                // Set height to full and removed h-1/2
               />
             </div>
             <Divider />
             <div className="flex-grow flex flex-col justify-between p-4">
               <p>{product.name}</p>
-              <p>{product.qty}</p>{" "}
-              {/* Menggunakan properti qty dari data produk */}
-              <p>{product.isEnabled ? "Enabled" : "Disabled"}</p>{" "}
-              {/* Menggunakan properti isEnabled dari data produk */}
+              <p>{product.price}</p>
+              <p>terjual barang</p>
             </div>
           </NextUICard>
         ))}

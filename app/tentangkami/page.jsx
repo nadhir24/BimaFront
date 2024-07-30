@@ -13,19 +13,9 @@ export default function AboutPage() {
         </p>
       </div>
       <div className="flex justify-center">
-        <p>
-          selama ini para pelanggan sangat puas khusus nya beberapa pelanggan
-          setia selalu mengulang pesanan nya secara berkala ,mereka bilang
-          kue-kue disini sangat lezat dan orang orang pun mulai menyukai nya
-        </p>
+        <p></p>
       </div>
-      <div className="flex justify-center">
-        <p>
-          selama ini para pelanggan sangat puas khusus nya beberapa pelanggan
-          setia selalu mengulang pesanan nya secara berkala ,mereka bilang
-          kue-kue disini sangat lezat dan orang orang pun mulai menyukai nya
-        </p>
-      </div>
+      <div className="flex justify-center"></div>
       <div className="flex justify-center">
         <p>
           selama ini para pelanggan sangat puas khusus nya beberapa pelanggan
@@ -42,20 +32,8 @@ export default function AboutPage() {
           hingga asinan Betawi{" "}
         </p>
       </div>
-      <div className="flex justify-center">
-        <p>
-          selama ini para pelanggan sangat puas khusus nya beberapa pelanggan
-          setia selalu mengulang pesanan nya secara berkala ,mereka bilang
-          kue-kue disini sangat lezat dan orang orang pun mulai menyukai nya
-        </p>
-      </div>
-      <div className="flex justify-center">
-        <p>
-          selama ini para pelanggan sangat puas khusus nya beberapa pelanggan
-          setia selalu mengulang pesanan nya secara berkala ,mereka bilang
-          kue-kue disini sangat lezat dan orang orang pun mulai menyukai nya
-        </p>
-      </div>
+      <div className="flex justify-center"></div>
+      <div className="flex justify-center"></div>
       <div className="flex justify-center">
         <p>
           selama ini para pelanggan sangat puas khusus nya beberapa pelanggan
