@@ -1,68 +1,30 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { Card as NextUICard, Divider, Image, Slider } from "@nextui-org/react";
-import { useState } from "react";
-import duImage from "@/public/du.jpg";
-import jaImage from "@/public/ja.jpg";
+import axios from "axios";
+import { image } from "@nextui-org/theme";
 
 interface Product {
   id: number;
   name: string;
   category: string;
-  price: number;
-  image: {
-    src: string;
-    radius: "sm" | "md" | "lg" | "none" | "full";
-  };
+  qty: number;
+  isEnabled: boolean;
+  image: string;
 }
 
-const products: Product[] = [
-  {
-    id: 1,
-    name: "Produk 1",
-    category: "kue ulangtahun",
-    price: 4,
-    image: { src: duImage.src, radius: "none" },
-  },
-  {
-    id: 2,
-    name: "Produk 2",
-    category: "kue tradisional",
-    price: 50,
-    image: { src: jaImage.src, radius: "none" },
-  },
-  {
-    id: 3,
-    name: "Produk 3",
-    category: "kue ulangtahun",
-    price: 5,
-    image: { src: duImage.src, radius: "none" },
-  },
-  {
-    id: 4,
-    name: "Produk 4",
-    category: "kue tradisional",
-    price: 50,
-    image: { src: jaImage.src, radius: "none" },
-  },
-  {
-    id: 5,
-    name: "Produk 5",
-    category: "kue ulangtahun",
-    price: 5,
-    image: { src: duImage.src, radius: "none" },
-  },
-  {
-    id: 6,
-    name: "Produk 6",
-    category: "kue tradisional",
-    price: 50,
-    image: { src: jaImage.src, radius: "none" },
-  },
-  // Add more products if needed
-];
-
 const Placement: React.FC = () => {
+  const [products, setProducts] = useState<Product[]>([
+    {
+      id: 0,
+      name: "",
+      category: "",
+      qty: 0,
+      isEnabled: false,
+      image: "",
+    },
+  ]);
   const [filters, setFilters] = useState<{
     category: string;
     priceRange: [number, number];
@@ -70,6 +32,19 @@ const Placement: React.FC = () => {
     category: "",
     priceRange: [0, 10],
   });
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("http://localhost:5000/catalog");
+        setProducts(response.data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   const handleFilterChange = (
     filterName: string,
@@ -79,22 +54,22 @@ const Placement: React.FC = () => {
   };
 
   const filteredProducts = products.filter((product) => {
-    if (filters.category && product.category.toString() !== filters.category) {
+    if (filters.category && product.category !== filters.category) {
       return false;
     }
 
-    if (filters.priceRange) {
-      const [minPrice, maxPrice] = filters.priceRange;
-      if (product.price < minPrice || product.price > maxPrice) {
-        return false;
-      }
-    }
+    // if (filters.priceRange) {
+    //   const [minPrice, maxPrice] = filters.priceRange;
+    //   if (product.price < minPrice || product.price > maxPrice) {
+    //     return false;
+    //   }
+    // }
 
     return true;
   });
-
+  console.log(products[0].image);
   return (
-    <div className="grid grid-cols-4 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-6  pt-12 ">
+    <div className="grid grid-cols-4 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-6 pt-12">
       <div className="col-span-1">
         <NextUICard>
           <div>
@@ -113,7 +88,6 @@ const Placement: React.FC = () => {
           <div>
             <label htmlFor="priceRange">Price Range:</label>
             <span className="pl-52">{`$${filters.priceRange[0]} - $${filters.priceRange[1]}`}</span>
-
             <Slider
               id="priceRange"
               onChange={(value) =>
@@ -131,26 +105,31 @@ const Placement: React.FC = () => {
         {filteredProducts.map((product) => (
           <NextUICard
             key={product.id}
-            className="w-auto m-4 flex flex-col" // Added flex-col to make card content stack vertically
+            className="w-auto m-4 flex flex-col"
             style={{ width: "204px", height: "373px", borderRadius: "20px" }}
           >
-            <div className="h-1/2">
+            <div className="h-full">
               <Image
-                src={product.image.src}
-                alt={product.name}
-                width={142} // Sesuaikan lebar gambar sesuai dengan aspek rasio
-                // Set height to full and removed h-1/2
+                src={`http://localhost:5000/${product.image}`} // Menggunakan properti image langsung dari data produk
+                alt="hahay"
+                className="object-cover"
+                style={{ borderRadius: "20px 20px 0 0" }}
               />
             </div>
             <Divider />
             <div className="flex-grow flex flex-col justify-between p-4">
               <p>{product.name}</p>
-              <p>{product.price}</p>
-              <p>terjual barang</p>
+              <p>{product.qty}</p>{" "}
+              {/* Menggunakan properti qty dari data produk */}
+              <p>{product.isEnabled ? "Enabled" : "Disabled"}</p>{" "}
+              {/* Menggunakan properti isEnabled dari data produk */}
             </div>
           </NextUICard>
         ))}
       </div>
+
+      {/* Add the standalone button at the bottom or a specific place in the grid */}
+      <div className="w-full flex justify-center mt-4"></div>
     </div>
   );
 };

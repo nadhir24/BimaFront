@@ -18,7 +18,8 @@ import sa from "@/public/sa.jpg";
 import du from "@/public/du.jpg";
 import Group10 from "@/public/Group 10.png";
 import Placement from "@/components/placement"; // Sesuaikan dengan path file Placement
-
+import Link from "next/link";
+import { SiteConfig } from "@/config/site";
 export default function Home() {
   const [loading, setLoading] = useState(false);
 
@@ -43,13 +44,16 @@ export default function Home() {
               Temukan Kue Impian Anda
             </h1>
           </div>
-          <NextUIButton
-            size="md"
-            variant="faded"
-            label="Pesan Sekarang"
-            onClick={handleClick}
-            isLoading={loading}
-          />
+
+          <Link href="/Belanja" passHref>
+            <NextUIButton
+              size="md"
+              variant="faded"
+              label="Pesan Sekarang"
+              onClick={handleClick}
+              isLoading={loading}
+            />
+          </Link>
         </div>
       </div>
       <div>
