@@ -2,9 +2,9 @@
 
 import { useState, useEffect } from "react";
 import { Card as NextUICard, Divider, Image, Slider } from "@nextui-org/react";
-import { useState } from "react";
 import duImage from "@/public/du.jpg";
 import jaImage from "@/public/ja.jpg";
+import axios from "axios";
 
 interface Product {
   id: number;
@@ -13,6 +13,7 @@ interface Product {
   qty: number;
   isEnabled: boolean;
   image: string;
+  price: number;
 }
 
 const Placement: React.FC = () => {
@@ -24,6 +25,7 @@ const Placement: React.FC = () => {
       qty: 0,
       isEnabled: false,
       image: "",
+      price: 0,
     },
   ]);
   const [filters, setFilters] = useState<{
@@ -111,7 +113,7 @@ const Placement: React.FC = () => {
           >
             <div className="h-full">
               <Image
-                src={product.image.src}
+                src={product.image}
                 alt={product.name}
                 width={142} // Sesuaikan lebar gambar sesuai dengan aspek rasio
                 // Set height to full and removed h-1/2
