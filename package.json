@@ -9,6 +9,7 @@
 		"lint": "next lint"
 	},
 	"dependencies": {
+		"@iconify/react": "^5.0.2",
 		"@nextui-org/button": "^2.0.31",
 		"@nextui-org/code": "^2.0.27",
 		"@nextui-org/input": "^2.1.21",
@@ -16,6 +17,7 @@
 		"@nextui-org/link": "^2.0.29",
 		"@nextui-org/navbar": "^2.0.30",
 		"@nextui-org/react": "^2.3.6",
+		"@nextui-org/scroll-shadow": "^2.1.19",
 		"@nextui-org/snippet": "^2.0.35",
 		"@nextui-org/switch": "^2.0.28",
 		"@nextui-org/system": "2.1.0",
@@ -44,5 +46,8 @@
 		"tailwindcss": "3.4.3",
 		"tailwindcss-animate": "^1.0.7",
 		"typescript": "5.0.4"
+	},
+	"devDependencies": {
+		"@iconify/tailwind": "^1.1.2"
 	}
 }

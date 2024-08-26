@@ -2,8 +2,6 @@
 
 import { useState, useEffect } from "react";
 import { Card as NextUICard, Divider, Image, Slider } from "@nextui-org/react";
-import duImage from "@/public/du.jpg";
-import jaImage from "@/public/ja.jpg";
 import axios from "axios";
 
 interface Product {
@@ -17,36 +15,36 @@ interface Product {
 }
 
 const Placement: React.FC = () => {
-  const [products, setProducts] = useState<Product[]>([
-    {
-      id: 0,
-      name: "",
-      category: "",
-      qty: 0,
-      isEnabled: false,
-      image: "",
-      price: 0,
-    },
-  ]);
+  const [products, setProducts] = useState<Product[]>([]);
   const [filters, setFilters] = useState<{
     category: string;
     priceRange: [number, number];
   }>({
     category: "",
-    priceRange: [0, 10],
+    priceRange: [0, 100],
   });
 
   useEffect(() => {
-    const fetchData = async () => {
+    // Fetch and transfer catalog data
+    const fetchAndTransferCatalog = async () => {
       try {
+        // Fetch data from the first endpoint
         const response = await axios.get("http://localhost:5000/catalog");
-        setProducts(response.data);
+        const catalogData = response.data;
+
+        // Post the fetched data to the second endpoint
+        await axios.post("http://localhost:3000/katalog", catalogData);
+
+        // Set the fetched data to the products state
+        setProducts(catalogData);
+
+        console.log("Catalog data successfully transferred!");
       } catch (error) {
-        console.error("Error fetching data:", error);
+        console.error("Error fetching or posting data:", error);
       }
     };
 
-    fetchData();
+    fetchAndTransferCatalog();
   }, []);
 
   const handleFilterChange = (
@@ -61,18 +59,16 @@ const Placement: React.FC = () => {
       return false;
     }
 
-    // if (filters.priceRange) {
-    //   const [minPrice, maxPrice] = filters.priceRange;
-    //   if (product.price < minPrice || product.price > maxPrice) {
-    //     return false;
-    //   }
-    // }
+    const [minPrice, maxPrice] = filters.priceRange;
+    if (product.price < minPrice || product.price > maxPrice) {
+      return false;
+    }
 
     return true;
   });
-  console.log(products[0].image);
+
   return (
-    <div className="grid grid-cols-4 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-6  pt-12 ">
+    <div className="grid grid-cols-4 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-6 pt-12">
       <div className="col-span-1">
         <NextUICard>
           <div>
@@ -83,8 +79,8 @@ const Placement: React.FC = () => {
               value={filters.category}
             >
               <option value="">All</option>
-              <option value="kue ulangtahun">kue ulang tahun</option>
-              <option value="kue tradisional">Kue tradisional</option>
+              <option value="kue ulangtahun">Kue Ulang Tahun</option>
+              <option value="kue tradisional">Kue Tradisional</option>
               {/* Add more options for categories */}
             </select>
           </div>
@@ -108,29 +104,26 @@ const Placement: React.FC = () => {
         {filteredProducts.map((product) => (
           <NextUICard
             key={product.id}
-            className="w-auto m-4 flex flex-col" // Added flex-col to make card content stack vertically
+            className="w-auto m-4 flex flex-col"
             style={{ width: "204px", height: "373px", borderRadius: "20px" }}
           >
             <div className="h-full">
               <Image
                 src={product.image}
                 alt={product.name}
-                width={142} // Sesuaikan lebar gambar sesuai dengan aspek rasio
-                // Set height to full and removed h-1/2
+                width={142}
+                height={142}
               />
             </div>
             <Divider />
             <div className="flex-grow flex flex-col justify-between p-4">
               <p>{product.name}</p>
               <p>{product.price}</p>
-              <p>terjual barang</p>
+              <p>{product.qty} items sold</p>
             </div>
           </NextUICard>
         ))}
       </div>
-
-      {/* Add the standalone button at the bottom or a specific place in the grid */}
-      <div className="w-full flex justify-center mt-4"></div>
     </div>
   );
 };

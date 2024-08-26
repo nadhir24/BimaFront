@@ -1,3 +1,4 @@
+"use client";
 import {
   Navbar,
   NavbarContent,
@@ -10,9 +11,10 @@ import {
 import Modall from "./modal";
 import { siteConfig } from "@/config/site";
 import { ThemeSwitch } from "./theme-switch";
-// import Lynk from "./link";
 import Link from "next/link";
 import { GoogleMapsIcon, RanoIcon } from "./icons";
+import HoverPopover from "@/function/HoverPopover";
+import HoverCartPopover from "@/function/HoverCart";
 
 export default function Navy() {
   return (
@@ -30,25 +32,36 @@ export default function Navy() {
         </div>
         <div className="hidden sm:flex items-center">
           <ul className="flex gap-4 justify-start ml-2">
-            {siteConfig.navItems.map((item) => (
-              <NavbarItem key={item.href}>
-                <Link href={item.href}>{item.label}</Link>
-              </NavbarItem>
-            ))}
+            {siteConfig.navItems.map((item) => {
+              if (item.label === "Beranda" || item.label === "Tentang kami") {
+                return (
+                  <NavbarItem key={item.href}>
+                    <Link href={item.href}>{item.label}</Link>
+                  </NavbarItem>
+                );
+              }
+
+              return (
+                <HoverPopover
+                  key={item.href}
+                  label={item.label}
+                  href={item.href}
+                />
+              );
+            })}
           </ul>
         </div>
       </NavbarContent>
 
       <NavbarContent className="flex basis-1/5 sm:basis-full" justify="end">
         <NavbarItem className="sm:flex gap-2">
-       
+          <HoverCartPopover label="Keranjang" href="/cart" />
           <ThemeSwitch />
         </NavbarItem>
         <NavbarItem>
           <Modall />
         </NavbarItem>
       </NavbarContent>
-
       <NavbarMenu>
         <div className="mx-4 mt-2 flex flex-col gap-2">
           {siteConfig.navMenuItems.map((item, index) => (

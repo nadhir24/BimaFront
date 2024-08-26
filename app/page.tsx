@@ -20,6 +20,8 @@ import Group10 from "@/public/Group 10.png";
 import Placement from "@/components/placement"; // Sesuaikan dengan path file Placement
 import Link from "next/link";
 import { SiteConfig } from "@/config/site";
+import MarketPopover from "@/components/MarketPopover";
+
 export default function Home() {
   const [loading, setLoading] = useState(false);
 
@@ -27,7 +29,7 @@ export default function Home() {
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
-    }, 2000);
+    }, 1000);
   };
 
   return (
@@ -45,7 +47,7 @@ export default function Home() {
             </h1>
           </div>
 
-          <Link href="/Belanja" passHref>
+          <Link href="/katalog" passHref>
             <NextUIButton
               size="md"
               variant="faded"
@@ -101,6 +103,10 @@ export default function Home() {
           subtitle="nasi tumpeng"
         />
       </div>
+      <div className="grid grid-cols-3">
+        <h1 className={title()}>Dapat di pesan</h1>
+       
+      </div>
       <div className="col-span-12 flex justify-center pt-10">
         <h1 className={title()}>Apa Kata Mereka?</h1>
       </div>
@@ -148,6 +154,50 @@ export default function Home() {
           description="Langganan saya dari tahun 2017,kue nya selalu made by order dan rasanya nikmat menurut keluarga saya."
           textAlign="justify"
         />
+        <div className="snap-x snap-mandatory overflow-x-auto flex">
+          <div className="snap-center ">
+            <img
+              src="https://images.unsplash.com/photo-1604999565976-8913ad2ddb7c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=320&h=160&q=80"
+              alt="Image 1"
+              className="w-80 h-40 object-cover"
+            />
+          </div>
+          <div className="snap-center ">
+            <img
+              src="https://images.unsplash.com/photo-1540206351-d6465b3ac5c1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=320&h=160&q=80"
+              alt="Image 2"
+              className="w-80 h-40 object-cover"
+            />
+          </div>
+          <div className="snap-center ">
+            <img
+              src="https://images.unsplash.com/photo-1622890806166-111d7f6c7c97?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=320&h=160&q=80"
+              alt="Image 3"
+              className="w-80 h-40 object-cover"
+            />
+          </div>
+          <div className="snap-center ">
+            <img
+              src="https://images.unsplash.com/photo-1590523277543-a94d2e4eb00b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=320&h=160&q=80"
+              alt="Image 4"
+              className="w-80 h-40 object-cover"
+            />
+          </div>
+          <div className="snap-center ">
+            <img
+              src="https://images.unsplash.com/photo-1575424909138-46b05e5919ec?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=320&h=160&q=80"
+              alt="Image 5"
+              className="w-80 h-40 object-cover"
+            />
+          </div>
+          <div className="snap-center ">
+            <img
+              src="https://images.unsplash.com/photo-1559333086-b0a56225a93c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=320&h=160&q=80"
+              alt="Image 6"
+              className="w-80 h-40 object-cover"
+            />
+          </div>
+        </div>
       </div>
     </>
   );

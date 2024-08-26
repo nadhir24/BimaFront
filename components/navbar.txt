@@ -7,25 +7,24 @@ import {
   NavbarItem,
   NavbarMenuItem,
 } from "@nextui-org/navbar";
-import { GoogleMapsIcon } from "./icons";
-import { ThemeSwitch } from "@/components/theme-switch";
-import { Link } from "@nextui-org/link";
-import { Logo } from "./icons";
-import { siteConfig } from "@/config/site";
 import Modall from "./modal";
+import { siteConfig } from "@/config/site";
+import { ThemeSwitch } from "./theme-switch";
+// import Lynk from "./link";
+import Link from "next/link";
+import {  GoogleMapsIcon, RanoIcon } from "./icons";
 
-export const Navy = () => {
+export default function Navy() {
   return (
     <Navbar maxWidth="xl" className="sticky top-0 z-50">
       <NavbarContent className="flex items-center justify-between">
-        <div className="flex items-center">
+        <div className="flex items-center justify-between">
           <NavbarContent className="sm:hidden basis-1 mr-4" justify="start">
             <NavbarMenuToggle />
           </NavbarContent>
           <NavbarBrand as="li" className="max-w-fit mr-4">
-            <Link href="/" className="flex items-center gap-1">
-              <Logo />
-              <p className="font-bold text-black">RanoCake</p>
+            <Link href="/" className="flex items-center gap-1 mt-2 mb-2">
+              <RanoIcon />
             </Link>
           </NavbarBrand>
         </div>
@@ -33,9 +32,7 @@ export const Navy = () => {
           <ul className="flex gap-4 justify-start ml-2">
             {siteConfig.navItems.map((item) => (
               <NavbarItem key={item.href}>
-                <Link href={item.href}>
-                  {item.label}
-                </Link>
+                <Link href={item.href}>{item.label}</Link>
               </NavbarItem>
             ))}
           </ul>
@@ -43,10 +40,8 @@ export const Navy = () => {
       </NavbarContent>
 
       <NavbarContent className="flex basis-1/5 sm:basis-full" justify="end">
+        
         <NavbarItem className="sm:flex gap-2">
-          <Link isExternal href={siteConfig.links.google} aria-label="Google">
-            <GoogleMapsIcon className="text-default-500" />
-          </Link>
           <ThemeSwitch />
         </NavbarItem>
         <NavbarItem>
@@ -76,4 +71,4 @@ export const Navy = () => {
       </NavbarMenu>
     </Navbar>
   );
-};
+}
