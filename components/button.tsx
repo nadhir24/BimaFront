@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
-import {Button as NextUIButton} from "@nextui-org/button";
+import { Button as NextUIButton } from "@nextui-org/button";
+import { Content } from "next/font/google";
 
 interface TombolProps {
   size: "sm" | "md" | "lg";
@@ -16,6 +17,7 @@ interface TombolProps {
   isLoading?: boolean;
   onClick?: () => void;
   style?: React.CSSProperties;
+  endContent?: React.ReactNode;
 }
 
 const Tombol: React.FC<TombolProps> = ({
@@ -25,6 +27,7 @@ const Tombol: React.FC<TombolProps> = ({
   isLoading = false,
   onClick,
   style,
+  endContent,
 }) => {
   const labels: { [key: string]: string } = {
     sm: "Get Started",
@@ -46,6 +49,7 @@ const Tombol: React.FC<TombolProps> = ({
       isLoading={isLoading}
       onClick={onClick}
       style={style} // Menambahkan properti style untuk menentukan warna latar belakang
+      endContent={endContent}
     >
       {label || labels[size]}
     </NextUIButton>
