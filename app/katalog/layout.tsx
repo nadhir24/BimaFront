@@ -1,4 +1,4 @@
-export default function BelanjaLayout({
+export default function KatalogLayout({
   children,
 }: {
   children: React.ReactNode;

@@ -4,6 +4,7 @@ import saa from "@/public/saa.jpg";
 import duu from "@/public/duu.jpg";
 import tii from "@/public/tii.jpg";
 import Image from "next/image";
+import { FramerComponentsExample } from "@/components/tes";
 
 export default function AboutPage() {
   return (
@@ -97,6 +98,8 @@ export default function AboutPage() {
           </p>
         </div>
       </div>
+      <FramerComponentsExample/>
+   
     </>
   );
 }

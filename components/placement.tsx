@@ -8,6 +8,7 @@ interface Product {
   id: number;
   name: string;
   category: string;
+  size: string;
   qty: number;
   isEnabled: boolean;
   image: string;
@@ -25,32 +26,25 @@ const Placement: React.FC = () => {
   });
 
   useEffect(() => {
-    // Fetch and transfer catalog data
-    const fetchAndTransferCatalog = async () => {
+    const fetchCatalog = async () => {
       try {
-        // Fetch data from the first endpoint
-        const response = await axios.get("http://localhost:5000/catalog");
-        const catalogData = response.data;
+        const response = await axios.get("http://localhost:5000/catalog/findall");
+        const catalogData = response.data.map((product: Product) => ({
+          ...product,
+          image: `http://localhost:5000/catalog/${product.image.split('/').pop()}`, // Update URL gambar
+        }));
 
-        // Post the fetched data to the second endpoint
-        await axios.post("http://localhost:3000/katalog", catalogData);
-
-        // Set the fetched data to the products state
         setProducts(catalogData);
-
-        console.log("Catalog data successfully transferred!");
+        console.log("Catalog data successfully fetched!");
       } catch (error) {
-        console.error("Error fetching or posting data:", error);
+        console.error("Error fetching catalog data:", error);
       }
     };
 
-    fetchAndTransferCatalog();
+    fetchCatalog();
   }, []);
 
-  const handleFilterChange = (
-    filterName: string,
-    value: string | [number, number]
-  ) => {
+  const handleFilterChange = (filterName: string, value: string | [number, number]) => {
     setFilters({ ...filters, [filterName]: value });
   };
 
@@ -81,7 +75,7 @@ const Placement: React.FC = () => {
               <option value="">All</option>
               <option value="kue ulangtahun">Kue Ulang Tahun</option>
               <option value="kue tradisional">Kue Tradisional</option>
-              {/* Add more options for categories */}
+              {/* Tambahkan opsi kategori lain sesuai kebutuhan */}
             </select>
           </div>
           <div>
@@ -89,9 +83,7 @@ const Placement: React.FC = () => {
             <span className="pl-52">{`$${filters.priceRange[0]} - $${filters.priceRange[1]}`}</span>
             <Slider
               id="priceRange"
-              onChange={(value) =>
-                handleFilterChange("priceRange", value as [number, number])
-              }
+              onChange={(value) => handleFilterChange("priceRange", value as [number, number])}
               value={filters.priceRange}
               defaultValue={filters.priceRange}
               minValue={0}
