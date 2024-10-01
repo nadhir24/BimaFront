@@ -93,11 +93,10 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <div className="col-span-12 flex justify-center pt-10">
+      {/* <div className="col-span-12 flex justify-center pt-10">
         <h1 className={`${title()} pb-10`}>Galeri Kecil Kami</h1>
-      </div>{" "}
-      <div className="max-w-[900px] gap-2 grid grid-cols-12 grid-rows-2 px-8 mx-auto">
-        {/* Tambahkan text-center di sini */}
+      </div>{" "} */}
+      {/* <div className="max-w-[900px] gap-2 grid grid-cols-12 grid-rows-2 px-8 mx-auto">
         <CardComponent
           imageSrc={wk}
           title="bersih dan rapih"
@@ -128,7 +127,7 @@ export default function Home() {
           title="Your day your way"
           subtitle="nasi tumpeng"
         />
-      </div>
+      </div> */}
       <div className="grid grid-cols-3">
         <h1 className={title()}>Dapat di pesan</h1>
       </div>

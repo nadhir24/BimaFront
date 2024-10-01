@@ -1,38 +1,36 @@
-import React from "react";
-import { useRouter } from "next/router";
+'use client';
 
-type DetailKatalogPageProps = {
-  params: {
-    slug: string[];
-  };
-};
+import { useParams } from 'next/navigation';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+import { Product } from '@/types/product';
+import Placement from '@/components/placement';
+import ProductDetailModal from '@/components/productModal';
 
-const DetailKatalogPage: React.FC<DetailKatalogPageProps> = ({ params }) => {
-  const router = useRouter();
-  const { slug } = router.query;
+export default function KatalogPage() {
+  const params = useParams();
+  const slug = params.slug as string[];
+  const [product, setProduct] = useState<Product | null>(null);
 
-  if (!slug) {
-    return <div>Loading...</div>;
+  useEffect(() => {
+    const fetchProduct = async () => {
+      if (slug && slug.length === 2) {
+        const [name, category] = slug;
+        try {
+          const response = await axios.get(`http://localhost:5000/catalog/find/${name}/${category}`);
+          setProduct(response.data);
+        } catch (error) {
+          console.error('Error fetching product data:', error);
+        }
+      }
+    };
+
+    fetchProduct();
+  }, [slug]);
+
+  if (slug && slug.length === 2 && product) {
+    return <ProductDetailModal product={product} onClose={() => window.history.back()} />;
   }
 
-  return (
-    <div>
-      <h2>ini adalah {slug[0]}</h2>
-      <h2>jenis nya {slug[1]}</h2>
-    </div>
-  );
-};
-
-export async function generateStaticParams() {
-  // Fetch or define the list of paths to pre-render
-  const paths = [
-    { slug: ["example1", "type1"] },
-    { slug: ["example2", "type2"] },
-  ];
-
-  return paths.map((path) => ({
-    params: { slug: path.slug },
-  }));
+  return <Placement />;
 }
-
-export default DetailKatalogPage;
