@@ -6,8 +6,6 @@ import axios from "axios";
 import Link from "next/link";
 import { Product } from "@/types/product";
 
-
- 
 const Placement: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [filters, setFilters] = useState<{
