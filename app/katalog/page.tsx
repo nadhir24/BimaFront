@@ -5,9 +5,7 @@ export default function KatalogPage() {
   return (
     <div>
       <h1>katalog page</h1>
-      <ProductDetailModal product={null} onClose={function (): void {
-        throw new Error("Function not implemented.");
-      } }/>
+      <Placement/>
     </div>
   );
 }
