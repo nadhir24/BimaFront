@@ -1,36 +1,51 @@
-'use client';
+"use client";
 
-import { useParams } from 'next/navigation';
-import { useEffect, useState } from 'react';
-import axios from 'axios';
-import { Product } from '@/types/product';
-import Placement from '@/components/placement';
-import ProductDetailModal from '@/components/productModal';
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { Product } from "@/types/product";
+import Image from "next/image";
 
-export default function KatalogPage() {
-  const params = useParams();
-  const slug = params.slug as string[];
+const ProductDetailPage: React.FC = () => {
+  const router = useRouter();
+  const { slug } = router.query;
   const [product, setProduct] = useState<Product | null>(null);
 
   useEffect(() => {
-    const fetchProduct = async () => {
-      if (slug && slug.length === 2) {
-        const [name, category] = slug;
+    if (slug) {
+      const fetchProductDetail = async () => {
         try {
-          const response = await axios.get(`http://localhost:5000/catalog/find/${name}/${category}`);
+          const [productName, category] = slug as string[];
+
+          const response = await axios.get(
+            `http://localhost:5000/catalog/detail?name=${productName}&category=${category}`
+          );
           setProduct(response.data);
         } catch (error) {
-          console.error('Error fetching product data:', error);
+          console.error("Error fetching product details:", error);
         }
-      }
-    };
+      };
 
-    fetchProduct();
+      fetchProductDetail();
+    }
   }, [slug]);
 
-  if (slug && slug.length === 2 && product) {
-    return <ProductDetailModal product={product} onClose={() => window.history.back()} />;
+  if (!product) {
+    return <p>Loading...</p>;
   }
 
-  return <Placement />;
-}
+  return (
+    <div className="product-detail">
+      <h1>{product.name}</h1>
+      <Image
+        src={`http://localhost:5000/catalog/${product.image}`}
+        alt={product.name}
+      />
+      <p>Price: {product.price}</p>
+      <p>Category: {product.category}</p>
+      <p>Description: {product.description}</p>
+    </div>
+  );
+};
+
+export default ProductDetailPage;

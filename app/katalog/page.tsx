@@ -1,11 +1,11 @@
 import React from "react";
-import Placement from "../../components/placement"
 import ProductDetailModal from "@/components/testing";
+import FilterableCatalog from "@/components/FilterableCatalog";
 export default function KatalogPage() {
   return (
     <div>
       <h1>katalog page</h1>
-      <Placement/>
+      <FilterableCatalog/>
     </div>
   );
 }
