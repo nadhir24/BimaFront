@@ -23,6 +23,6 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "components/button.tsx", "components/Clist.jsx", "components/navbar.tsx", "components/cardforblog.jsx", "components/BlogList.jsx", "app/blog/page.jsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "components/button.tsx", "components/Clist.jsx", "components/navbar.tsx", "components/cardforblog.jsx", "components/BlogList.jsx", "app/blog/page.jsx", "app/katalog/[catalog]/[...slug]/page.tsx"],
   "exclude": ["node_modules"]
 }

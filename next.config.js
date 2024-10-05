@@ -1,5 +1,12 @@
 module.exports = {
   images: {
-    domains: ["localhost"], // Only the hostname, no port
+    remotePatterns: [
+      {
+        protocol: "http",
+        hostname: "localhost",
+        port: "5000",
+        pathname: "/catalog/images/**",
+      },
+    ],
   },
 };
