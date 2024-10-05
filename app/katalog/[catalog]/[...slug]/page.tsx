@@ -66,7 +66,7 @@ const ProductDetailPage = () => {
           {/* Image Section */}
           <div className="flex basis-full lg:basis-4/6 p-4">
             <Image
-              src={`http://localhost:5000/catalog/images/${product.image?.split("/").pop()}`}
+              src={`http://localhost:5000/catalog/${product.image?.split("/").pop()}`}
               alt={product.name}
               width={256}
               height={270}

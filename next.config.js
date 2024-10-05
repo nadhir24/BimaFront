@@ -5,7 +5,7 @@ module.exports = {
         protocol: "http",
         hostname: "localhost",
         port: "5000",
-        pathname: "/catalog/images/**",
+        pathname: "/catalog/**",
       },
     ],
   },

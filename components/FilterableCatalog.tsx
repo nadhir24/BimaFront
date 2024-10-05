@@ -38,7 +38,7 @@ export default function FilterableCatalog() {
     const fetchCatalogs = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:5000/catalog/findall"
+          "http://localhost:5000/catalog/"
         );
         setCatalogs(response.data);
         setFilteredCatalogs(response.data); // Show all catalogs initially
@@ -80,7 +80,7 @@ export default function FilterableCatalog() {
           <Card key={index} className="shadow-lg">
             <CardBody>
               <Image
-                src={`http://localhost:5000/catalog/images/${catalog.image?.split("/").pop()}`}
+                src={`http://localhost:5000/catalog/${catalog.image?.split("/").pop()}`}
                 alt={catalog.name}
                 width={256}
                 height={270}
