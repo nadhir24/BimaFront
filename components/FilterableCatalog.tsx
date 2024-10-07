@@ -20,11 +20,11 @@ interface Size {
 interface Catalog {
   id: number;
   name: string;
-  category: string;
+  categorySlug: string; // Ensuring consistent naming
   image: string | null;
   sizes: Size[];
   qty: string;
-  slug: string; // Ensure slug is included in the Catalog interface
+  productSlug: string; // Ensuring consistent naming
 }
 
 export default function FilterableCatalog() {
@@ -37,9 +37,7 @@ export default function FilterableCatalog() {
   useEffect(() => {
     const fetchCatalogs = async () => {
       try {
-        const response = await axios.get(
-          "http://localhost:5000/catalog/"
-        );
+        const response = await axios.get("http://localhost:5000/catalog/");
         setCatalogs(response.data);
         setFilteredCatalogs(response.data); // Show all catalogs initially
       } catch (error) {
@@ -62,8 +60,8 @@ export default function FilterableCatalog() {
   };
 
   // Function to navigate to the product detail page with category and slug
-  const viewProductDetails = (category: string, slug: string) => {
-    router.push(`/katalog/${category}/${slug}`); // Navigate to the product detail page
+  const viewProductDetails = (categorySlug: string, productSlug: string) => {
+    router.push(`/katalog/${categorySlug}/${productSlug}`);
   };
 
   return (
@@ -80,7 +78,7 @@ export default function FilterableCatalog() {
           <Card key={index} className="shadow-lg">
             <CardBody>
               <Image
-                src={`http://localhost:5000/catalog/${catalog.image?.split("/").pop()}`}
+                src={`http://localhost:5000/catalog/images/${catalog.image?.split("/").pop()}`}
                 alt={catalog.name}
                 width={256}
                 height={270}
@@ -90,7 +88,7 @@ export default function FilterableCatalog() {
 
               <div className="mt-4">
                 <h4 className="font-bold text-lg">{catalog.name}</h4>
-                <p className="text-gray-600">{catalog.category}</p>
+                <p className="text-gray-600">{catalog.categorySlug}</p>
                 <p>Starting from {catalog.sizes[0]?.price || "N/A"}</p>
               </div>
             </CardBody>
@@ -98,7 +96,7 @@ export default function FilterableCatalog() {
             <CardFooter>
               <Button
                 className="w-full"
-                onPress={() => viewProductDetails(catalog.category, catalog.slug)} // Pass category and slug to navigate
+                onPress={() => viewProductDetails(catalog.categorySlug, catalog.productSlug)} // Consistent naming
               >
                 View Details
               </Button>
