@@ -1,82 +1,73 @@
 "use client";
 import { Popover, PopoverContent, PopoverTrigger } from "@nextui-org/react";
 import Link from "next/link";
-import { SunCartIcon } from "@/components/icons"; // Ensure this path is correct
+import { SunCartIcon } from "@/components/icons"; // Adjust import path accordingly
 import { ScrollShadow } from "@nextui-org/scroll-shadow";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import Image from "next/image";
+
 interface HoverCartPopoverProps {
   label: string;
   href: string;
 }
 
-export default function HoverCartPopover({
-  label,
-  href,
-}: HoverCartPopoverProps) {
+interface Size {
+  size: string;
+  price: string;
+}
+
+interface CartItem {
+  id: number;
+  name: string;
+  image: string;
+  sizes: Size[];
+  qty: number;
+  price: string;
+}
+
+export default function HoverCartPopover({ label, href }: HoverCartPopoverProps) {
   const [isOpen, setIsOpen] = useState(false);
-  const [cartItems, setCartItems] = useState([]);
+  const [cartItems, setCartItems] = useState<CartItem[]>([]);
 
-  const handleMouseEnter = () => {
-    setIsOpen(true);
-  };
-
-  const handleMouseLeave = () => {
-    setIsOpen(false);
-  };
-
-  // Fungsi untuk mengambil data keranjang dari backend
   const fetchCartItems = async () => {
     try {
-      const response = await axios.get("/api/cart"); // Ganti dengan endpoint backend Anda
+      const response = await axios.get("http://localhost:5000/cart"); // Backend endpoint to fetch cart items
       setCartItems(response.data);
     } catch (error) {
       console.error("Error fetching cart items:", error);
     }
   };
 
-  // Panggil fetchCartItems saat komponen dimuat
   useEffect(() => {
     fetchCartItems();
   }, []);
 
   return (
     <div className="relative">
-      <Popover
-        isOpen={isOpen}
-        onOpenChange={(open) => setIsOpen(open)}
-        placement="bottom"
-        showArrow={true}
-      >
+      <Popover isOpen={isOpen} onOpenChange={setIsOpen} placement="bottom" showArrow={true}>
         <PopoverTrigger>
-          <div className="cursor-pointer" onMouseEnter={handleMouseEnter}>
+          <div className="cursor-pointer" onMouseEnter={() => setIsOpen(true)}>
             <SunCartIcon />
           </div>
         </PopoverTrigger>
-        <PopoverContent
-          className="relative rounded-md w-[300px] h-[400px] overflow-y-auto"
-          onMouseEnter={handleMouseEnter}
-          onMouseLeave={handleMouseLeave}
-        >
+        <PopoverContent className="relative rounded-md w-[300px] h-[400px] overflow-y-auto">
           <ScrollShadow className="w-full h-full">
             <div className="px-4 py-2">
               <div className="text-small font-bold">{label} Content</div>
-              {cartItems.map((item, i) => (
-                <div key={i} className="text-tiny flex items-center mt-2">
-                  <img
-                    src={item.imageUrl} // Ganti dengan field gambar dari backend
-                    alt={`Item ${i + 1}`}
-                    className="w-16 h-16 object-cover rounded-md"
+              {cartItems.map((item) => (
+                <div key={item.id} className="text-tiny flex items-center mt-2">
+                  <Image
+                    src={`http://localhost:5000/catalog/images/${item.image}`}
+                    alt={item.name}
+                    width={50}
+                    height={50}
+                    className="rounded-xl"
                   />
                   <div className="ml-2">
                     <div className="font-bold">{item.name}</div>
-                    <div className="text-gray-600">{item.description}</div>
-                    <div className="text-gray-800 mt-1">
-                      Quantity: <span className="font-semibold">{item.quantity}</span>
-                    </div>
-                    <div className="text-gray-800">
-                      Price: <span className="font-semibold">Rp{item.price}</span>
-                    </div>
+                    <div className="text-gray-800 mt-1">Quantity: {item.qty}</div>
+                    <div className="text-gray-800">Price: {item.price}</div>
                   </div>
                 </div>
               ))}

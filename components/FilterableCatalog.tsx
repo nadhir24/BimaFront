@@ -25,6 +25,7 @@ interface Catalog {
   sizes: Size[];
   qty: string;
   productSlug: string; // Ensuring consistent naming
+  description: String;
 }
 
 export default function FilterableCatalog() {
@@ -88,7 +89,7 @@ export default function FilterableCatalog() {
 
               <div className="mt-4">
                 <h4 className="font-bold text-lg">{catalog.name}</h4>
-                <p className="text-gray-600">{catalog.categorySlug}</p>
+                <p className="text-black-600">{catalog.description.toString()}</p>
                 <p>Starting from {catalog.sizes[0]?.price || "N/A"}</p>
               </div>
             </CardBody>
