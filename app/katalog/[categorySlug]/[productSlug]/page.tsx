@@ -62,7 +62,59 @@ const ProductDetailPage = () => {
       toast.error("Please select a size.");
       return;
     }
-
+  
+    // Simulasikan logika cek user (misalnya dari auth context atau state management)
+    const isLoggedIn = false; // Ganti dengan pengecekan apakah user login atau tidak
+  
+    if (isLoggedIn) {
+      // Jika user login, kirim request ke backend
+      try {
+        const response = await axios.post("http://localhost:5000/cart/add", {
+          userId: 1, // Ganti dengan user ID yang sebenarnya
+          catalogId: product?.id, // ID produk
+          sizeId: selectedSize.id, // ID ukuran yang dipilih
+          quantity: 1, // Jumlah, bisa diambil dari input user
+        });
+  
+        toast.success("Item added to cart!", {
+          autoClose: 2000,
+          hideProgressBar: true,
+        });
+      } catch (error) {
+        console.error("Error adding item to cart:", error);
+        toast.error("Failed to add item to cart.");
+      }
+    } else {
+      // Jika user belum login (guest), simpan ke sessionStorage atau localStorage
+      const guestCart = JSON.parse(localStorage.getItem("guestCart") || "[]");
+  
+      const existingItem = guestCart.find(
+        (item: any) => item.catalogId === product?.id && item.sizeId === selectedSize.id
+      );
+  
+      if (existingItem) {
+        // Tambah quantity jika item sudah ada di keranjang
+        existingItem.quantity += 1;
+      } else {
+        // Tambah item baru ke keranjang guest
+        guestCart.push({
+          catalogId: product?.id,
+          name: product?.name,
+          image: product?.image,
+          sizeId: selectedSize.id,
+          size: selectedSize.size,
+          price: selectedSize.price,
+          quantity: 1,
+        });
+      }
+  
+      localStorage.setItem("guestCart", JSON.stringify(guestCart));
+  
+      toast.success("Item added to guest cart!", {
+        autoClose: 2000,
+        hideProgressBar: true,
+      });
+    }
     try {
       const response = await axios.post("http://localhost:5000/cart/add", {
         userId: 1, // Replace with actual logged-in user ID

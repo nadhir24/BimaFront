@@ -31,17 +31,26 @@ export default function HoverCartPopover({ label, href }: HoverCartPopoverProps)
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
 
   const fetchCartItems = async () => {
-    try {
-      const response = await axios.get("http://localhost:5000/cart"); // Backend endpoint to fetch cart items
-      setCartItems(response.data);
-    } catch (error) {
-      console.error("Error fetching cart items:", error);
+    const isLoggedIn = false; // Ganti dengan pengecekan apakah user login atau tidak
+  
+    if (isLoggedIn) {
+      try {
+        const response = await axios.get("http://localhost:5000/cart"); // Backend endpoint untuk user login
+        setCartItems(response.data);
+      } catch (error) {
+        console.error("Error fetching cart items:", error);
+      }
+    } else {
+      // Ambil keranjang dari localStorage untuk guest
+      const guestCart = JSON.parse(localStorage.getItem("guestCart") || "[]");
+      setCartItems(guestCart);
     }
   };
-
+  
   useEffect(() => {
     fetchCartItems();
   }, []);
+  
 
   return (
     <div className="relative">
