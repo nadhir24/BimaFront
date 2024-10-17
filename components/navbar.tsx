@@ -12,11 +12,15 @@ import Modall from "./modal";
 import { siteConfig } from "@/config/site";
 import { ThemeSwitch } from "./theme-switch";
 import Link from "next/link";
-import { GoogleMapsIcon, RanoIcon } from "./icons";
-import HoverPopover from "@/function/HoverPopover";
-import HoverCartPopover from "@/function/HoverCart";
+import { RanoIcon } from "./icons";
+import HoverCart from "@/function/HoverCartModal"; // Import HoverCart here
+import { useState } from "react";
+import { CartItem } from "@/function/CartItem";
+import HoverCartModal from "@/function/HoverCartModal";
 
 export default function Navy() {
+  const [cartItems, setCartItems] = useState<CartItem[]>([]);
+
   return (
     <Navbar maxWidth="xl" className="sticky top-0 z-50">
       <NavbarContent className="flex items-center justify-between">
@@ -32,30 +36,19 @@ export default function Navy() {
         </div>
         <div className="hidden sm:flex items-center">
           <ul className="flex gap-4 justify-start ml-2">
-            {siteConfig.navItems.map((item) => {
-              if (item.label === "Beranda" || item.label === "Tentang kami") {
-                return (
-                  <NavbarItem key={item.href}>
-                    <Link href={item.href}>{item.label}</Link>
-                  </NavbarItem>
-                );
-              }
-
-              return (
-                <HoverPopover
-                  key={item.href}
-                  label={item.label}
-                  href={item.href}
-                />
-              );
-            })}
+            {siteConfig.navItems.map((item) => (
+              <NavbarItem key={item.href}>
+                <Link href={item.href}>{item.label}</Link>
+              </NavbarItem>
+            ))}
           </ul>
         </div>
       </NavbarContent>
-
       <NavbarContent className="flex basis-1/5 sm:basis-full" justify="end">
         <NavbarItem className="sm:flex gap-2">
-          <HoverCartPopover label="Keranjang" href="/cart" />
+          {/* Pass cartItems and setCartItems props to HoverCart */}
+          <HoverCartModal />
+
           <ThemeSwitch />
         </NavbarItem>
         <NavbarItem>

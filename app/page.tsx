@@ -21,6 +21,9 @@ import tentangkami from "@/public/tentangkami.png";
 import tii from "@/public/tii.jpg";
 import Link from "next/link";
 import { Icon } from "@iconify/react";
+import { Button } from "@nextui-org/button";
+import { Toaster, toast } from "sonner";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function Home() {
   const [loading, setLoading] = useState(false);
@@ -92,6 +95,20 @@ export default function Home() {
             </div>
           </div>
         </div>
+      </div>
+      <div>
+        <Button
+          color="primary"
+          size="md"
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          onClick={() => toast("My first toast")}
+        >
+          Click Me
+        </Button>
+
+        <Toaster position="top-right" richColors />
+
+        {/* Example of different toasts */}
       </div>
       {/* <div className="col-span-12 flex justify-center pt-10">
         <h1 className={`${title()} pb-10`}>Galeri Kecil Kami</h1>
