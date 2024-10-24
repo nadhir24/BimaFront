@@ -1,0 +1,11 @@
+<Image
+src={`http://localhost:5000/catalog/images/${product.image?.split("/").pop()}`}
+alt={product.name}
+width={256}
+height={270}
+/>
+<Card>
+<h1>{product.name}</h1>
+<p>Category: {product.category}</p>
+<p>Quantity: {product.qty}</p>
+</Card>
